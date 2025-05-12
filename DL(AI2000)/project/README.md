@@ -1,5 +1,40 @@
 PIRVision Human Activity Detection
 ================================
+This project involves the classification of PIR sensor data combined with contextual tabular features (e.g., temperature and time) to detect human activity or environmental conditions. The dataset contains time-series data from multiple PIR sensors (`PIR_1` to `PIR_55`) and additional features like temperature and time. The goal is to build robust machine learning models that can classify the data into three distinct labels:
+
+- **Label 0**: Vacancy
+- **Label 1**: Stationary human presence
+- **Label 2**: Other activity/motion
+
+The project follows a structured pipeline, including data preprocessing, feature engineering, exploratory data analysis (EDA), and the development of multiple deep learning models. Each model is evaluated using 5-fold cross-validation to ensure generalization.
+
+---
+
+## Project Summary Table
+
+| **Step**                       | **Description**                                                                                     | **Key Outputs**                                                                 |
+| ------------------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| **1. Data Loading**            | Loaded the PIR sensor dataset and performed initial inspection.                                     | Dataset loaded into a Pandas DataFrame.                                         |
+| **2. EDA**                     | Explored the dataset for class imbalance, feature distributions, and outliers.                      | Boxplots, histograms, and descriptive statistics.                               |
+| **3. Outlier Handling**        | Replaced outliers in `PIR_1` with the median value to ensure uniformity across PIR columns.         | Cleaned dataset with consistent PIR sensor distributions.                       |
+| **4. Feature Engineering**     | Engineered cyclical time features (`Hour_sin`, `Hour_cos`, etc.) and normalized temperature values. | Enhanced dataset with additional features for temporal and contextual patterns. |
+| **5. Feature Scaling**         | Applied `MinMaxScaler` to PIR columns and `StandardScaler` to temperature for model compatibility.  | Scaled dataset ready for training.                                              |
+| **6. Model 1: LSTM**           | Built an LSTM-based model to capture temporal dependencies in PIR sensor data.                      | Achieved ~95% accuracy with strong generalization.                              |
+| **7. Model 2: LSTM + Tabular** | Combined LSTM for PIR data with a dense block for tabular features.                                 | Improved accuracy (~98%) by leveraging both modalities.                         |
+| **8. Model 3: CNN**            | Developed a 1D-CNN model to extract local temporal patterns from PIR data.                          | Achieved ~95% accuracy with computational efficiency.                           |
+| **9. Model 4: CNN + Tabular**  | Combined CNN for PIR data with a dense block for tabular features.                                  | Achieved ~98-99% accuracy with excellent generalization.                           |
+| **10. Evaluation**             | Evaluated all models using 5-fold cross-validation and analyzed class-wise performance.             | Metrics: Accuracy, Macro F1-Score, Confusion Matrix.                            |
+| **11. Insights**               | Summarized key findings, including class-wise performance and feature importance.                   | Identified strong correlation between temperature and Label 2.                  |
+
+---
+
+## Key Takeaways
+
+1. **Hybrid Models Perform Best**: Combining PIR time-series data with tabular features significantly improves classification accuracy.
+2. **Class Imbalance Challenges**: Class 1 (Stationary human presence) is the most challenging to classify due to overlap with other classes.
+3. **Feature Importance**: Temperature and cyclical time features play a crucial role in distinguishing between classes.
+4. **Generalization**: All models demonstrate strong generalization, with minimal overfitting observed during training.
+--------------------------
 This project implements classification models (LSTM, CNN, and hybrid models) to detect human activity or environmental conditions.
 Files Included (from zip):
 --------------------------
