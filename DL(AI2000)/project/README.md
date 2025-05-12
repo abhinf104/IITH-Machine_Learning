@@ -1,4 +1,3 @@
-================================
 PIRVision Human Activity Detection
 ================================
 This project implements classification models (LSTM, CNN, and hybrid models) to detect human activity or environmental conditions.
